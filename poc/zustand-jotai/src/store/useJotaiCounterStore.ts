@@ -1,43 +1,39 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
-// Main counter atom
-export const countAtom = atom(0);
+// Interface
+interface CounterState {
+  count: number,
+}
 
-// Counter actions
-export const increaseCountAtom = atom(
-  null,
-  (get, set) => set(countAtom, get(countAtom) + 1)
-);
+export const counterState = atom<CounterState>({
+  count: 0,
+})
 
-export const doubleCountAtom = atom(
+export const updateCountAtom = atom(
   null,
-  (get, set) => set(countAtom, get(countAtom) * 2)
-);
-
-export const tripleCountAtom = atom(
-  null,
-  (get, set) => set(countAtom, get(countAtom) * 3)
-);
-
-export const resetCountAtom = atom(
-  null,
-  (get, set) => set(countAtom, 0)
-);
-
-export const addFiveToCountAtom = atom(
-  null,
-  (get, set) => set(countAtom, get(countAtom) + 5)
+  (get, set, newCount: number) => {
+    const state = get(counterState);
+    set(counterState, { ...state, count: newCount });
+  }
 );
 
 // Persisted
-export const persistedCountAtom = atomWithStorage('persistedCount', 0);
+export const persistedCounterStateAtom = atomWithStorage<CounterState>('persistedCount', { count: 0});
 
-export const mergePersistedCountAtom = atom(
+export const mergePersistedCounterStateAtom = atom(
   null,
-  (get, set) => set(persistedCountAtom, get(countAtom))
+  (get, set) => set(persistedCounterStateAtom, get(counterState))
 );
-export const resetPersistedCountAtom = atom(
+
+export const resetPersistedCounterStateAtom = atom(
   null,
-  (get, set) => set(persistedCountAtom, 0)
+  (_, set) => set(persistedCounterStateAtom, { count: 0 })
+);
+
+// Primitive
+export const countAtom = atom<number>(0);
+
+export const increaseCountNumberAtom = atom(
+  null, (get, set) => set(countAtom, get(countAtom) + 1 )
 );

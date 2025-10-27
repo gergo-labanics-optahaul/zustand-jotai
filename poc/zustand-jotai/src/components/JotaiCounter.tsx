@@ -1,35 +1,27 @@
-import {useAtom, useAtomValue, useSetAtom} from "jotai";
+import {useAtomValue, useSetAtom} from "jotai";
 import React from 'react';
 import {
-  addFiveToCountAtom,
-  countAtom,
-  doubleCountAtom,
-  increaseCountAtom, mergePersistedCountAtom, persistedCountAtom,
-  resetCountAtom, resetPersistedCountAtom,
-  tripleCountAtom
+  counterState, mergePersistedCounterStateAtom,
+  persistedCounterStateAtom, resetPersistedCounterStateAtom, updateCountAtom,
 } from "../store/useJotaiCounterStore";
 
 const JotaiCounter: React.FC = () => {
-  const count = useAtomValue(countAtom);
-  const increase = useSetAtom(increaseCountAtom);
-  const double = useSetAtom(doubleCountAtom);
-  const triple = useSetAtom(tripleCountAtom);
-  const reset = useSetAtom(resetCountAtom);
-  const addFive = useSetAtom(addFiveToCountAtom);
+  const {count} = useAtomValue(counterState);
+  const update = useSetAtom(updateCountAtom);
 
-  const [ persistedCount] = useAtom(persistedCountAtom);
-  const mergePersisted = useSetAtom(mergePersistedCountAtom);
-  const resetPersisted = useSetAtom(resetPersistedCountAtom);
+  const {count: persistedCount} = useAtomValue(persistedCounterStateAtom);
+  const mergePersisted = useSetAtom(mergePersistedCounterStateAtom);
+  const resetPersisted = useSetAtom(resetPersistedCounterStateAtom);
 
   return (
     <div style={{ textAlign: 'center' }}>
       <div>
-        <h2>Count: {typeof count === 'object' ? JSON.stringify(count) : count}</h2>
-        <button onClick={increase}>+1</button>
-        <button onClick={double}>Double</button>
-        <button onClick={triple}>Triple</button>
-        <button onClick={reset}>Reset</button>
-        <button onClick={addFive}>+5</button>
+        <h2>Count: {count}</h2>
+        <button onClick={() => update(count + 1)}>+1</button>
+        <button onClick={() => update(count * 2)}>Double</button>
+        <button onClick={() => update(count * 3)}>Triple</button>
+        <button onClick={() => update(0)}>Reset</button>
+        <button onClick={() => update(count + 5)}>+5</button>
       </div>
 
       <div style={{ textAlign: 'center', marginTop: '2rem' }}>

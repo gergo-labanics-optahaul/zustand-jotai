@@ -19,7 +19,7 @@ const ZustandCounter: React.FC = () => {
       </div>
 
       <div style={{textAlign: 'center'}}>
-        <h2>Count: {persistedCount}</h2>
+        <h2>Persisted Count: {persistedCount}</h2>
         <button onClick={persistedMerge}>Merge</button>
         <button onClick={persistedReset}>Reset</button>
       </div>

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from "zustand/middleware";
 
+// Interface
 interface CounterState {
   count: number;
   increase: () => void;
@@ -8,10 +9,6 @@ interface CounterState {
   triple: () => void;
   reset: () => void;
 }
-
-const tripleCount = (get: () => CounterState, set: (state: Partial<CounterState>) => void) => {
-  set({ count: get().count * 3 })
-};
 
 export const counterState = create<CounterState>((set, get) => ({
   count: 0,
@@ -23,6 +20,10 @@ export const counterState = create<CounterState>((set, get) => ({
   triple: () => tripleCount(get, set),
   reset: () => set({count: 0}),
 }));
+
+const tripleCount = (get: () => CounterState, set: (state: Partial<CounterState>) => void) => {
+  set({ count: get().count * 3 })
+};
 
 export const addFiveToCounter = () => {
   counterState.setState((state) => ({
@@ -50,6 +51,7 @@ export const persistedCounterState = create<PersistedCounterState>()(
   )
 );
 
+// Primitive
 export const cnt = create<number>(() => 0)
 
 export const increaseCnt = () => cnt.setState(cnt.getState() + 1)
