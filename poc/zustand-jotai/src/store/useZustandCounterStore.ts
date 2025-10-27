@@ -49,3 +49,7 @@ export const persistedCounterState = create<PersistedCounterState>()(
     }
   )
 );
+
+export const cnt = create<number>(() => 0)
+
+export const increaseCnt = () => cnt.setState(cnt.getState() + 1)
