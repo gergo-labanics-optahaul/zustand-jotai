@@ -13,7 +13,7 @@ const tripleCount = (get: () => CounterState, set: (state: Partial<CounterState>
   set({ count: get().count * 3 })
 };
 
-export const counterStore = create<CounterState>((set, get) => ({
+export const counterState = create<CounterState>((set, get) => ({
   count: 0,
   increase: () => set((state) => ({count: state.count + 1})),
   double: () => {
@@ -24,44 +24,24 @@ export const counterStore = create<CounterState>((set, get) => ({
   reset: () => set({count: 0}),
 }));
 
+export const addFiveToCounter = () => {
+  counterState.setState((state) => ({
+    count: state.count + 5,
+  }));
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Persisted
 interface PersistedCounterState {
   count: number;
   merge: () => void;
   reset: () => void;
 }
 
-export const persistedCounterStore = create<PersistedCounterState>()(
+export const persistedCounterState = create<PersistedCounterState>()(
   persist<PersistedCounterState>(
     (set) => ({
       count: 0,
-      merge: () => set({ count: counterStore.getState().count }),
+      merge: () => set({ count: counterState.getState().count }),
       reset: () => set({ count: 0 }),
     }),
     {

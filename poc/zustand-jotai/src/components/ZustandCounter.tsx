@@ -1,10 +1,11 @@
 import React from 'react';
 import {useStore} from "zustand/react";
-import {counterStore, persistedCounterStore} from "../store/useCounterStore";
+import {addFiveToCounter, counterState, persistedCounterState} from "../store/useZustandCounterStore";
 
-const Counter: React.FC = () => {
-  const { count, increase, double, triple, reset } = counterStore();
-  const { count: persistedCount, merge: persistedMerge, reset: persistedReset} = useStore(persistedCounterStore);
+const ZustandCounter: React.FC = () => {
+  const { count, increase, double, triple, reset } = counterState();
+  // const { count, increase, double, triple, reset } = counterState.getState();
+  const { count: persistedCount, merge: persistedMerge, reset: persistedReset} = useStore(persistedCounterState);
 
   return (
     <div style={{textAlign: 'center'}}>
@@ -14,6 +15,7 @@ const Counter: React.FC = () => {
         <button onClick={double}>Double</button>
         <button onClick={triple}>Triple</button>
         <button onClick={reset}>Reset</button>
+        <button onClick={addFiveToCounter}>+5</button>
       </div>
 
       <div style={{textAlign: 'center'}}>
@@ -25,4 +27,4 @@ const Counter: React.FC = () => {
   );
 };
 
-export default Counter;
+export default ZustandCounter;

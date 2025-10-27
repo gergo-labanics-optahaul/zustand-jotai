@@ -1,11 +1,12 @@
 import React from 'react';
-import Counter from "./components/Counter";
+import ZustandCounter from "./components/ZustandCounter";
 
 const App: React.FC = () => {
   return (
     <div>
-      <h1>Zustand State Handling</h1>
-      <Counter />
+      <h1>Zustand</h1>
+      <ZustandCounter/>
+      <h1>Jotai</h1>
     </div>
   );
 };
