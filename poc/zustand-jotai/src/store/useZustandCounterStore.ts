@@ -1,6 +1,11 @@
 import { create } from 'zustand';
 import { persist } from "zustand/middleware";
 
+// Primitive
+export const cnt = create<number>(() => 0)
+
+export const increaseCnt = () => cnt.setState(cnt.getState() + 1)
+
 // Interface
 interface CounterState {
   count: number;
@@ -50,8 +55,3 @@ export const persistedCounterState = create<PersistedCounterState>()(
     }
   )
 );
-
-// Primitive
-export const cnt = create<number>(() => 0)
-
-export const increaseCnt = () => cnt.setState(cnt.getState() + 1)
