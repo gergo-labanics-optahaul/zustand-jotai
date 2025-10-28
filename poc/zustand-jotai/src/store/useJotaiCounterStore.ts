@@ -8,6 +8,7 @@ export const increaseCountNumberAtom = atom(
   null, (get, set) => set(countAtom, get(countAtom) + 1 )
 );
 
+// Store
 export const store = createStore();
 store.set(countAtom, 0)
 store.get(countAtom)
