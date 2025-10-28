@@ -5,7 +5,7 @@
 ### Introduction
 Primitive and flexible state management.
 - Extremely fine-grained re-renders (atoms)
-- Atoms can be stored in containers
+- Supports primitives and objects
 
 ### Core
 - useAtom
