@@ -8,8 +8,8 @@ A small, fast, and scalable bearbones state management solution. Zustand has a c
 - Supports both primitive and object based states
 
 ### Hooks
-- useStore (vanilla store)
-- useShallow (re-rended only when the actual keys of the state changed)
+- useStore
+- useShallow (re-render only when the actual keys of the state changed)
 - useStoreWithEqualityFn (define when to re-render)
 
 ### Middlewares

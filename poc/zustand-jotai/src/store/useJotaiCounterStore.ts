@@ -1,4 +1,4 @@
-import { atom } from 'jotai';
+import {atom, createStore} from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
 // Primitive
@@ -7,6 +7,10 @@ export const countAtom = atom<number>(0);
 export const increaseCountNumberAtom = atom(
   null, (get, set) => set(countAtom, get(countAtom) + 1 )
 );
+
+export const store = createStore();
+store.set(countAtom, 0)
+store.get(countAtom)
 
 // Interface
 interface CounterState {
